@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Bookify.Domain.Abstractions;
 using Bookify.Domain.Apartments;
+using Bookify.Domain.Bookings.Events;
 
 namespace Bookify.Domain.Bookings
 {
@@ -44,9 +45,13 @@ namespace Bookify.Domain.Bookings
         public DateTime? CancelledOnUtc { get; private set; }
 
 
-        public static Booking ReserveBooking(Guid userId, Guid apartmentId, DateRange duration, DateTime utcNow)
+        public static Booking ReserveBooking(Guid userId, Guid apartmentId, DateRange duration,PricingDetails pricingDetails ,DateTime utcNow)
         {
-            var booking = new Booking(Guid.NewGuid(),apartmentId,userId,duration, );
+            var booking = new Booking(Guid.NewGuid(), apartmentId, userId, duration, pricingDetails.PriceForPeriod,
+                pricingDetails.CleaningFee, pricingDetails.AmenitiesUpCharge,
+                pricingDetails.TotalPrice,BookingStatus.Reserved,utcNow );
+            booking.RaiseDomainEvents(new BookingReservedDomainEvent(booking.Id));
+            return booking;
         }
     }
 }

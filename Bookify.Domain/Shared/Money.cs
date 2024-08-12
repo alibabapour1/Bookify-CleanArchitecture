@@ -1,6 +1,8 @@
-﻿namespace Bookify.Domain.Apartments;
+﻿using System.Runtime.CompilerServices;
 
-public record Money(Decimal Amount , Currency Currency)
+namespace Bookify.Domain.Apartments;
+
+public record Money(decimal Amount , Currency Currency)
 {
     public static Money operator +(Money First, Money Second)
     {
@@ -13,5 +15,8 @@ public record Money(Decimal Amount , Currency Currency)
     }
 
     public static Money Zero() => new(0, Currency.None);
+    public static Money Zero(Currency currency) => new(0, currency);
+
+    public bool IsZero() => this == Zero(Currency);
 
 }
