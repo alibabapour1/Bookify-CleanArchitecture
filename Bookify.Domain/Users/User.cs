@@ -8,7 +8,7 @@ using Bookify.Domain.Users.Events;
 
 namespace Bookify.Domain.Users
 {
-    public class User:Entity
+    public sealed class User:Entity
     {
         private User(Guid id, Email email,FirstName firstName, LastName lastName) : base(id)
         {
