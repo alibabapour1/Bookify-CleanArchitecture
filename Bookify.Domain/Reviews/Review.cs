@@ -10,7 +10,7 @@ namespace Bookify.Domain.Reviews;
 public sealed class Review:Entity
 {
     private Review(
-        Guid Id,
+        Guid id,
         Guid bookingId,
         Guid userId,
         Guid apartmentId,
@@ -21,7 +21,7 @@ public sealed class Review:Entity
 
         
         ) 
-        : base(Id)
+        : base(id)
     {
         BookingId = bookingId;
         UserId = userId;
