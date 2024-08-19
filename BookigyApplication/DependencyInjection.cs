@@ -15,6 +15,7 @@ namespace Bookify.Application
             services.AddMediatR(configuration =>
             {
                 configuration.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
+                
             });
 
 
