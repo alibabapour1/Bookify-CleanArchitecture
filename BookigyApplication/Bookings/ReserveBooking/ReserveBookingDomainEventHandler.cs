@@ -14,6 +14,14 @@ internal sealed class ReserveBookingDomainEventHandler :INotificationHandler<Boo
     private readonly IUserRepository _userRepository;
     private readonly IEmailService _email;
 
+   
+    public ReserveBookingDomainEventHandler(IBookingRepository bookingRepository, IUserRepository userRepository, IEmailService email)
+    {
+        _bookingRepository = bookingRepository;
+        _userRepository = userRepository;
+        _email = email;
+    }
+
     public async Task Handle(BookingReservedDomainEvent notification, CancellationToken cancellationToken)
     {
         var booking = await  _bookingRepository.GetBookingByIdAsync(notification.Id,cancellationToken);
@@ -28,7 +36,7 @@ internal sealed class ReserveBookingDomainEventHandler :INotificationHandler<Boo
             return;
         }
 
-        _email.SendEmailAsync(user.Email, "Booking Reserved !",
+        await _email.SendEmailAsync(user.Email, "Booking Reserved !",
             "The Booking Has Been Reserved Successfully You Have To Confirm In 10 Minutes ");
     }
 }
