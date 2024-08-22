@@ -16,7 +16,7 @@ public class GetBookingQueryHandler:IQueryHandler<GetBookingQuery, BookingRespon
 
     public async Task<Result<BookingResponse>> Handle(GetBookingQuery request, CancellationToken cancellationToken)
     {
-        using var Connection = _sqlConnectionFactory.CreateConnection();
+        using var connection = _sqlConnectionFactory.CreateConnection();
         const string sql = """
                         SELECT
                            id AS Id,
@@ -42,14 +42,13 @@ public class GetBookingQueryHandler:IQueryHandler<GetBookingQuery, BookingRespon
 
 
 
-        var booking = await Connection.QueryFirstOrDefaultAsync<BookingResponse> (
+        var booking = await connection.QueryFirstOrDefaultAsync<BookingResponse> (
             
             sql,
             new
             {
                 request.BookingId
-            }
-        );
+            });
         return booking;
     }
 }
