@@ -29,6 +29,7 @@ public class LoggingBehavior<TRequest , TResponse> :IPipelineBehavior<TRequest,T
         catch (Exception e)
         {
             _logger.LogError(e,"Command {Command}",name);
+
             throw;
         }
     }
