@@ -21,7 +21,8 @@ public static class DependencyInjection
         services.AddDbContext<ApplicationDbContext>(options =>
             {
 
-                options.UseSqlServer(connectionString);
+                options.UseSqlServer(connectionString)
+                    .UseSnakeCaseNamingConvention();
             });
         return services;
     }
