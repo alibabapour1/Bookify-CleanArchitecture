@@ -40,7 +40,7 @@ public sealed class Review:Entity
     public DateTime CreatedDateUtc { get; private set; }
 
 
-    public Result<Review> Create(Booking booking,Rating rating,Comment comment,DateTime utcNow)
+    public static Result<Review> Create(Booking booking,Rating rating,Comment comment,DateTime utcNow)
     {
         if (booking.BookingStatus != BookingStatus.Completed)
         {
