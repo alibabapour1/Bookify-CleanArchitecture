@@ -4,14 +4,14 @@ namespace Bookify.Domain.Apartments;
 
 public record Money(decimal Amount , Currency Currency)
 {
-    public static Money operator +(Money First, Money Second)
+    public static Money operator +(Money first, Money second)
     {
-        if (First.Currency != Second.Currency)
+        if (first.Currency != second.Currency)
         {
             throw new ApplicationException("The Currencies are not the same ");
         }
 
-        return new Money(First.Amount + Second.Amount,First.Currency);
+        return new Money(first.Amount + second.Amount,first.Currency);
     }
 
     public static Money Zero() => new(0, Currency.None);
