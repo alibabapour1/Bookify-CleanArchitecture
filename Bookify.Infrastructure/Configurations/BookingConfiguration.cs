@@ -43,10 +43,9 @@ public class BookingConfiguration : IEntityTypeConfiguration<Booking>
 
         builder.OwnsOne(booking => booking.TotalPrice, priceBuilder =>
         {
-
             priceBuilder.Property(money => money.Currency)
                 .HasConversion(currency => currency.Code,
-                    code => Currency.FromCode(code));
+                code => Currency.FromCode(code));
         });
 
         builder.HasOne<Apartment>()
