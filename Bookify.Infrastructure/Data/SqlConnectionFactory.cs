@@ -1,8 +1,6 @@
 ﻿using System.Data;
 using Bookify.Application.Abstractions.Data;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
-using Microsoft.EntityFrameworkCore.Storage;
+using Npgsql;
 
 namespace Bookify.Infrastructure.Data;
 
@@ -17,7 +15,7 @@ public class SqlConnectionFactory : ISqlConnectionFactory
 
     public IDbConnection CreateConnection()
     {
-        var connection = new SqlConnection(_connectionString);
+        var connection = new NpgsqlConnection(_connectionString);
 
         connection.Open();
         return connection;

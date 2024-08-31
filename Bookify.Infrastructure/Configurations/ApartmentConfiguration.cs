@@ -43,6 +43,8 @@ internal sealed class ApartmentConfiguration :IEntityTypeConfiguration<Apartment
                         , code => Currency.FromCode(code));
             });
 
+        builder.Property<uint>("version").IsRowVersion();
+
 
 
     }
