@@ -14,10 +14,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookify.Application", "Book
 		{7A92F96B-6809-4690-94AC-6A1712CC6AFD} = {7A92F96B-6809-4690-94AC-6A1712CC6AFD}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookify.Infrastructure", "Bookify.Infrastructure\Bookify.Infrastructure.csproj", "{FD3F58CC-6552-4AE8-86E6-6C2D44F5700F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookify.Infrastructure", "Bookify.Infrastructure\Bookify.Infrastructure.csproj", "{FD3F58CC-6552-4AE8-86E6-6C2D44F5700F}"
 	ProjectSection(ProjectDependencies) = postProject
 		{691DA271-3F2A-46CB-A62B-4855DD574025} = {691DA271-3F2A-46CB-A62B-4855DD574025}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookify.Api", "Bookify.Api\Bookify.Api.csproj", "{D6E327A4-E70D-49C2-BE6E-D9E873F53EB5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{FD3F58CC-6552-4AE8-86E6-6C2D44F5700F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD3F58CC-6552-4AE8-86E6-6C2D44F5700F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD3F58CC-6552-4AE8-86E6-6C2D44F5700F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6E327A4-E70D-49C2-BE6E-D9E873F53EB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6E327A4-E70D-49C2-BE6E-D9E873F53EB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6E327A4-E70D-49C2-BE6E-D9E873F53EB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6E327A4-E70D-49C2-BE6E-D9E873F53EB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -45,6 +51,7 @@ Global
 		{7A92F96B-6809-4690-94AC-6A1712CC6AFD} = {9A448FAE-83DD-48A7-81BE-2E7C7E3054E3}
 		{691DA271-3F2A-46CB-A62B-4855DD574025} = {9A448FAE-83DD-48A7-81BE-2E7C7E3054E3}
 		{FD3F58CC-6552-4AE8-86E6-6C2D44F5700F} = {9A448FAE-83DD-48A7-81BE-2E7C7E3054E3}
+		{D6E327A4-E70D-49C2-BE6E-D9E873F53EB5} = {9A448FAE-83DD-48A7-81BE-2E7C7E3054E3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8506B5DA-72E0-4FF8-AA8A-3F078388D686}
