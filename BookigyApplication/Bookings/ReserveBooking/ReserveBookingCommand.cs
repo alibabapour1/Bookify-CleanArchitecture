@@ -10,5 +10,4 @@ public record ReserveBookingCommand(
     Guid UserId,
     DateOnly Start,
     DateOnly End
-)
-    : ICommand<Guid>;
+) : ICommand<Guid>;
