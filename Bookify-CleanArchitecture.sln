@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookify.Infrastructure", "B
 		{691DA271-3F2A-46CB-A62B-4855DD574025} = {691DA271-3F2A-46CB-A62B-4855DD574025}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookify.Api", "Bookify.Api\Bookify.Api.csproj", "{D6E327A4-E70D-49C2-BE6E-D9E873F53EB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookify.Api", "Bookify.Api\Bookify.Api.csproj", "{D6E327A4-E70D-49C2-BE6E-D9E873F53EB5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
