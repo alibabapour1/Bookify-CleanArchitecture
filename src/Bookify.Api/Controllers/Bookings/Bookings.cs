@@ -25,7 +25,7 @@ namespace Bookify.Api.Controllers.Bookings
 
             return result.IsSuccess ? Ok(result.Value) : NotFound();
         }
-
+        [HttpPost]
         public async Task<IActionResult> ReserveBooking(ReserveBookingRequest request,
             CancellationToken cancellationToken)
         {

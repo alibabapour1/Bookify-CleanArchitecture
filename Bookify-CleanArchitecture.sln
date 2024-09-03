@@ -7,8 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9A448FAE-83D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{C11131DB-2648-44EF-81D5-AF85EBA8816E}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{2B03696D-1AE8-42C5-8E09-70D058205317}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookify.Api", "src\Bookify.Api\Bookify.Api.csproj", "{95330211-F1EA-47BE-A667-925A4CCDABB3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookify.Domain", "src\Bookify.Domain\Bookify.Domain.csproj", "{37F23B2F-2549-4526-9607-6D1E94F2D3EA}"
@@ -17,16 +15,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookify.Infrastructure", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookify.Application", "src\BookigyApplication\Bookify.Application.csproj", "{C403FEF1-ADCC-429D-8E23-F1356C135845}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{39179C98-1C17-4C74-A25C-B2C7ED1545C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2B03696D-1AE8-42C5-8E09-70D058205317}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2B03696D-1AE8-42C5-8E09-70D058205317}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2B03696D-1AE8-42C5-8E09-70D058205317}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2B03696D-1AE8-42C5-8E09-70D058205317}.Release|Any CPU.Build.0 = Release|Any CPU
 		{95330211-F1EA-47BE-A667-925A4CCDABB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{95330211-F1EA-47BE-A667-925A4CCDABB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95330211-F1EA-47BE-A667-925A4CCDABB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -43,6 +39,10 @@ Global
 		{C403FEF1-ADCC-429D-8E23-F1356C135845}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C403FEF1-ADCC-429D-8E23-F1356C135845}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C403FEF1-ADCC-429D-8E23-F1356C135845}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39179C98-1C17-4C74-A25C-B2C7ED1545C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39179C98-1C17-4C74-A25C-B2C7ED1545C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39179C98-1C17-4C74-A25C-B2C7ED1545C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39179C98-1C17-4C74-A25C-B2C7ED1545C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
