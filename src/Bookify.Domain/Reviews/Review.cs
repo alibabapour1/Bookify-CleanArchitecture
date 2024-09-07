@@ -32,6 +32,10 @@ public sealed class Review:Entity
 
     }
 
+    private Review()
+    {
+    }
+
     public Guid BookingId { get; private set; }
     public Guid UserId { get; private set; }
     public Guid ApartmentId { get; private set; }

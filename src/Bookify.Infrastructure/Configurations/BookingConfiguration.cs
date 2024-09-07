@@ -47,6 +47,7 @@ public class BookingConfiguration : IEntityTypeConfiguration<Booking>
                 .HasConversion(currency => currency.Code,
                 code => Currency.FromCode(code));
         });
+        builder.OwnsOne(booking => booking.Duration);
 
         builder.HasOne<Apartment>()
             .WithMany()

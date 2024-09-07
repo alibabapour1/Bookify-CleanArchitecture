@@ -22,7 +22,7 @@ public class GetBookingQueryHandler:IQueryHandler<GetBookingQuery, BookingRespon
                            id AS Id,
                            apartment_id AS ApartmentId,
                            user_id AS UserId,
-                           status AS Status,
+                           booking_status AS Status,
                            price_for_period_amount AS PriceAmount,
                            price_for_period_currency AS PriceCurrency,
                            cleaning_fee_amount AS CleaningFeeAmount,

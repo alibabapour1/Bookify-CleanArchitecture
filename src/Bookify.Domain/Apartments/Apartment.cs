@@ -21,6 +21,11 @@ namespace Bookify.Domain.Apartments
 
         }
 
+        private Apartment()
+        {
+
+        }
+
         public Name Name { get; private set; }
 
         public Description  Description { get; private set; }

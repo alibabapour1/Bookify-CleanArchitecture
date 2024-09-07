@@ -13,6 +13,10 @@ namespace Bookify.Domain.Abstractions
         {
             EntityId = Id;
         }
+
+        protected Entity()
+        {
+        }
         public Guid Id { get; set; }
 
       

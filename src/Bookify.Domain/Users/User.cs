@@ -18,6 +18,9 @@ namespace Bookify.Domain.Users
 
         }
 
+        private User()
+        {
+        }
         public FirstName FirstName { get; private set; } 
         public LastName LastName { get; private set; }
         public Email Email { get; private set; }
