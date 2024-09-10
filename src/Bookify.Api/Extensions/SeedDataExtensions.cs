@@ -34,7 +34,7 @@ public static class SeedDataExtensions
                 CleaningFeeAmount = faker.Random.Decimal(25, 200),
                 CleaningFeeCurrency = "USD",
                 Amenities = new List<int> { (int)Amenity.Parking, (int)Amenity.MountainView },
-                LastBookedOn = DateTime.MinValue
+                LastBookedOn = faker.Date.Between(new DateTime(2023,1,1),DateTime.Now)
             });
         }
 

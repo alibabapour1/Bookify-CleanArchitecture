@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bookify.Application.Abstractions.Messaging;
 using Bookify.Application.Exceptions;
 using FluentValidation;
 using FluentValidation.Results;
@@ -11,7 +12,7 @@ using ValidationException = System.ComponentModel.DataAnnotations.ValidationExce
 
 namespace Bookify.Application.Abstractions.Behaviors
 {
-    public class ValidationBehavior<TRequest , TResponse > : IPipelineBehavior<TRequest,TResponse> where TRequest : IBaseRequest
+    public class ValidationBehavior<TRequest , TResponse > : IPipelineBehavior<TRequest,TResponse> where TRequest : IBaseCommand
     {
         private readonly IEnumerable<IValidator<TRequest>> _validators;
 

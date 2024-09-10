@@ -7,11 +7,11 @@ namespace Bookify.Api.Controllers.Apartments
 {
     [ApiController]
     [Route("api/apartments")]
-    public class Apartments : ControllerBase
+    public class ApartmentsController : ControllerBase
     {
         private readonly ISender _sender;
 
-        public Apartments(ISender sender)
+        public ApartmentsController(ISender sender)
         {
             _sender = sender;
         }

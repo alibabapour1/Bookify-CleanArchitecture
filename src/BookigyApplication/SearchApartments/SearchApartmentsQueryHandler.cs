@@ -29,7 +29,7 @@ public class SearchApartmentsQueryHandler:IQueryHandler<SearchApartmentsQuery,IR
     public async Task<Result<IReadOnlyList<ApartmentResponse>>> Handle(SearchApartmentsQuery request, CancellationToken cancellationToken)
     {
         //Check for OverLapping
-        if (request.Start > request.End)
+        if (request.StartDate > request.EndDate)
         {
             return new List<ApartmentResponse>();
         }
@@ -57,7 +57,7 @@ public class SearchApartmentsQueryHandler:IQueryHandler<SearchApartmentsQuery,IR
                                    b.apartment_id = a.id AND
                                    b.duration_start <= @EndDate AND
                                    b.duration_end >= @StartDate AND
-                                   b.status = ANY(@ActiveBookingStatuses)
+                                   b.booking_status = ANY(@ActiveBookingStatuses)
                            )
                            """;
 
@@ -70,8 +70,8 @@ public class SearchApartmentsQueryHandler:IQueryHandler<SearchApartmentsQuery,IR
             }
             ,new
             {
-                request.Start,
-                request.End,
+                request.StartDate,
+                request.EndDate,
                 ActiveBookingStatuses
             },
             //Splits Query On Country Column 
