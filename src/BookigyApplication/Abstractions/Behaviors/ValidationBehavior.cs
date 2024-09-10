@@ -25,7 +25,7 @@ namespace Bookify.Application.Abstractions.Behaviors
             RequestHandlerDelegate<TResponse> next,
             CancellationToken cancellationToken)
         {
-            if (_validators.Any())
+            if (!_validators.Any())
             {
                 return await next();
             }
@@ -46,7 +46,7 @@ namespace Bookify.Application.Abstractions.Behaviors
                 throw new Exceptions.ValidationException(validationErrors);
             }
 
-            return await next();
+            return await next();    
 
         } 
     }

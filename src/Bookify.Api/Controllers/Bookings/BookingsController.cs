@@ -8,11 +8,11 @@ namespace Bookify.Api.Controllers.Bookings
 {
     [ApiController]
     [Route("api/bookings")]
-    public class Bookings : ControllerBase
+    public class BookingsController : ControllerBase
     {
         private readonly ISender _sender;
 
-        public Bookings(ISender sender)
+        public BookingsController(ISender sender)
         {
             _sender = sender;
         }
@@ -36,7 +36,11 @@ namespace Bookify.Api.Controllers.Bookings
 
 
             var result = await _sender.Send(command, cancellationToken);
-            
+            if (result.IsFailure)
+            {
+                return BadRequest(result.Error);
+            }
+
             return CreatedAtAction(nameof(GetBooking), new { id = result.Value }, result.Value);
         }
     }
