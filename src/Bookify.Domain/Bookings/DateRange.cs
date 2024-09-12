@@ -2,6 +2,10 @@
 
 public record DateRange
 {
+    private DateRange()
+    {
+        
+    }
     public DateOnly Start { get; set; }
     public DateOnly End { get; set; }
 

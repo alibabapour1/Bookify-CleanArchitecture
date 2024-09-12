@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bookify.Domain.Apartments;
+using Bookify.Domain.Shared;
 
 
 namespace Bookify.Domain.Bookings

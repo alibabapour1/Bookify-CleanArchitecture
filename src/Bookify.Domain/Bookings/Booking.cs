@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bookify.Domain.Abstractions;
+﻿using Bookify.Domain.Abstractions;
 using Bookify.Domain.Apartments;
 using Bookify.Domain.Bookings.Events;
+using Bookify.Domain.Shared;
 
 namespace Bookify.Domain.Bookings
 {

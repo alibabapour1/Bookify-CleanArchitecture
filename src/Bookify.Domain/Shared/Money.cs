@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace Bookify.Domain.Apartments;
+﻿namespace Bookify.Domain.Shared;
 
 public record Money(decimal Amount , Currency Currency)
 {
