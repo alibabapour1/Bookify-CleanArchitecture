@@ -363,4 +363,7 @@ MigrationBackup/
 FodyWeavers.xsd
 
 #Postgres
-/.containers/database/
+/.containers/
+
+#keyclock
+/.files/

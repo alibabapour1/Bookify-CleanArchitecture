@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using Bookify.Application.Exceptions;
+﻿using Bookify.Application.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bookify.Api.Middlewares
