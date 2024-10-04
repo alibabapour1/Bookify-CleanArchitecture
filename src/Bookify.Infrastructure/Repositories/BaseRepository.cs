@@ -21,6 +21,6 @@ internal abstract class BaseRepository<T> where T : Entity
     public void Add(T entity)
     {
         DbContext.Add(entity); 
-        //I didn't used AddAsync method because this is an inMemory operation the persisting will happen when we call SaveChangesAsync method
+        //I didn't use AddAsync method because this is an inMemory operation the persisting will happen when we call SaveChangesAsync method
     }
 }
