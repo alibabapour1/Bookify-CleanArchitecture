@@ -1,6 +1,5 @@
 ﻿using Bookify.Application.Exceptions;
 using Bookify.Domain.Abstractions;
-using FluentValidation.Validators;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
