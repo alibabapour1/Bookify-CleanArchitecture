@@ -3,6 +3,7 @@ using Bookify.Application.Authentication;
 using Bookify.Domain.Abstractions;
 using Bookify.Infrastructure.Authentication.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
 
 namespace Bookify.Infrastructure.Authentication;
 
@@ -13,10 +14,10 @@ public class JwtService :IJwtService
     private readonly KeycloakOptions _options;
     private readonly HttpClient _httpClient;
 
-    public JwtService(HttpClient httpClient, KeycloakOptions options)
+    public JwtService(HttpClient httpClient, IOptions<KeycloakOptions> options)
     {
         _httpClient = httpClient;
-        _options = options;
+        _options = options.Value;
     }
 
 

@@ -39,7 +39,7 @@ public class AdminAuthorizationDelegatingHandler: DelegatingHandler
         };
 
         var authorizationTokenContent = new FormUrlEncodedContent(authorizationRequestParameters);
-        var request = new HttpRequestMessage(HttpMethod.Post, new Uri(_keycloakOptions.AdminUrl))
+        var request = new HttpRequestMessage(HttpMethod.Post, new Uri(_keycloakOptions.TokenUrl))
         {
             Content = authorizationTokenContent
         };
@@ -49,8 +49,6 @@ public class AdminAuthorizationDelegatingHandler: DelegatingHandler
 
         return await httpResponse.Content.ReadFromJsonAsync<AuthorizationToken>(cancellationToken) ??
                throw new ApplicationException("Application Exception");
-
-
 
 
     }

@@ -30,6 +30,8 @@ services:
    environment:
       - KEYCLOAK_ADMIN=admin
       - KEYCLOAK_ADMIN_PASSWORD=admin
+      - KEYCLOAK_LOGLEVEL=DEBUG
+      - ROOT_LOGLEVEL=DEBUG
    volumes:
       - ./.containers/identity:/opt/keycloak/data
       - ./.files/bookify-realm-export.json:/opt/keycloak/data/import/realm.json
