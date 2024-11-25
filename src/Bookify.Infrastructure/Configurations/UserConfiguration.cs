@@ -29,5 +29,6 @@ public class UserConfiguration:IEntityTypeConfiguration<User>
                 value => new Domain.Users.Email(value));
 
         builder.HasIndex(user => user.Email).IsUnique();
+        builder.HasIndex(user => user.IdentityId).IsUnique();
     }
 }
