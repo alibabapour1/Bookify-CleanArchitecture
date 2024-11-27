@@ -1,12 +1,12 @@
 ﻿using Bookify.Application.Abstractions.Data;
 using Bookify.Application.Abstractions.Messaging;
 using Bookify.Application.Apartments.SearchApartments;
-using Bookify.Application.Bookings.GetBooking;
+using Bookify.Application.SearchApartments;
 using Bookify.Domain.Abstractions;
 using Bookify.Domain.Bookings;
 using Dapper;
 
-namespace Bookify.Application.SearchApartments;
+namespace Bookify.Application.Apartments;
 
 public class SearchApartmentsQueryHandler:IQueryHandler<SearchApartmentsQuery,IReadOnlyList<ApartmentResponse>>
 {
