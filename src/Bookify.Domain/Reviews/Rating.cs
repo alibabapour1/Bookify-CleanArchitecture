@@ -4,10 +4,10 @@ namespace Bookify.Domain.Reviews;
 
 public sealed record Rating
 {
-    private static readonly Error Inavlid = new ("Review.Invalid", "The Given Review Rating Is Not Valid !");
+    private static readonly Error Invalid = new ("Review.Invalid", "The Given Review Rating Is Not Valid !");
     private Rating(int value)
     {
-        value = Value;
+        Value = value;
     }
     public int Value { get; init; }
 
@@ -15,7 +15,7 @@ public sealed record Rating
     {
         if (value<1 || value> 5)
         {
-           return Result.Failure<Rating>(Inavlid);
+           return Result.Failure<Rating>(Invalid);
         }
 
         return  new Rating(value);

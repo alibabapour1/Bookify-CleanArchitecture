@@ -11,5 +11,8 @@ namespace Bookify.Domain.Reviews
     {
         public static Error NotEligible =
             new("Review.NotEligible", "The Booking Is Not Completed So It Cannot Be Reviewed.");
+
+        public static Error NotFound =
+            new("Review.NotFound", "There Is Not Review For The Apartment.");
     }
 }
