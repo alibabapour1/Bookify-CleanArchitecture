@@ -6,33 +6,56 @@ using Bookify.Domain.Reviews;
 
 namespace Bookify.Application.Reviews.AddReview;
 
-public class AddReviewCommandHandler:ICommandHandler<AddReviewCommand,Guid>
+internal sealed class AddReviewCommandHandler : ICommandHandler<AddReviewCommand>
 {
-    private readonly IDateTimeProvider _dateTimeProvider;
-    private readonly IBookingRepository _bookRepository;
+    private readonly IBookingRepository _bookingRepository;
     private readonly IReviewRepository _reviewRepository;
     private readonly IUnitOfWork _unitOfWork;
-    public AddReviewCommandHandler(IDateTimeProvider dateTimeProvider, IBookingRepository bookRepository, IReviewRepository reviewRepository, IUnitOfWork unitOfWork)
+    private readonly IDateTimeProvider _dateTimeProvider;
+
+    public AddReviewCommandHandler(
+        IBookingRepository bookingRepository,
+        IReviewRepository reviewRepository,
+        IUnitOfWork unitOfWork,
+        IDateTimeProvider dateTimeProvider)
     {
-        _dateTimeProvider = dateTimeProvider;
-        _bookRepository = bookRepository;
+        _bookingRepository = bookingRepository;
         _reviewRepository = reviewRepository;
         _unitOfWork = unitOfWork;
+        _dateTimeProvider = dateTimeProvider;
     }
 
-    public async Task<Result<Guid>> Handle(AddReviewCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(AddReviewCommand request, CancellationToken cancellationToken)
     {
-        var booking = await _bookRepository.GetByIdAsync(request.BookingId, cancellationToken);
-        if (booking == null)
-        {
-            return Result.Failure<Guid>(BookingErrors.NotFound);
-        } 
-            
-        var review = Review.Create(booking, request.Rating, request.Comment, _dateTimeProvider.UtcNow);
+        var booking = await _bookingRepository.GetByIdAsync(request.BookingId, cancellationToken);
 
-        _reviewRepository.AddReview(review.Value);
+        if (booking is null)
+        {
+            return Result.Failure(BookingErrors.NotFound);
+        }
+
+        var ratingResult = Rating.Create(request.Rating);
+
+        if (ratingResult.IsFailure)
+        {
+            return Result.Failure(ratingResult.Error);
+        }
+
+        var reviewResult = Review.Create(
+            booking,
+            ratingResult.Value,
+            new Comment(request.Comment),
+            _dateTimeProvider.UtcNow);
+
+        if (reviewResult.IsFailure)
+        {
+            return Result.Failure(reviewResult.Error);
+        }
+
+        _reviewRepository.Add(reviewResult.Value);
+
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return review.Value.Id;
+        return Result.Success();
     }
 }

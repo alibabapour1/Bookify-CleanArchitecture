@@ -9,12 +9,10 @@ namespace Bookify.Application.Reviews.GetReviews;
 public class GetReviewsQueryHandler:IQueryHandler<GetReviewsQuery, IReadOnlyList<ReviewResponse>>
 {
     private readonly ISqlConnectionFactory _connectionFactory;
-    private readonly IReviewRepository _reviewRepository;
 
-    public GetReviewsQueryHandler(ISqlConnectionFactory connectionFactory, IReviewRepository reviewRepository)
+    public GetReviewsQueryHandler(ISqlConnectionFactory connectionFactory)
     {
         _connectionFactory = connectionFactory;
-        _reviewRepository = reviewRepository;
     }
 
     public async Task<Result<IReadOnlyList<ReviewResponse>>> Handle(GetReviewsQuery request, CancellationToken cancellationToken)
@@ -34,9 +32,10 @@ public class GetReviewsQueryHandler:IQueryHandler<GetReviewsQuery, IReadOnlyList
         var reviews = await connection.QueryAsync<ReviewResponse>(sql
             , new { request.ApartmentId });
 
-        if (reviews == null)
+        var reviewResponses = reviews.ToList();
+        if (reviewResponses.Any() == false)
             return Result.Failure<IReadOnlyList<ReviewResponse>>(ReviewErrors.NotFound);
 
-        return reviews.ToList();
+        return reviewResponses;
     }
 }
