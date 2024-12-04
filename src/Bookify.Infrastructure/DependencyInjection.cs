@@ -1,10 +1,12 @@
-﻿using Bookify.Application.Abstractions.Clock;
+﻿using Bookify.Application.Abstractions.Authentication;
+using Bookify.Application.Abstractions.Clock;
 using Bookify.Application.Abstractions.Data;
 using Bookify.Application.Abstractions.Email;
 using Bookify.Application.Authentication;
 using Bookify.Domain.Abstractions;
 using Bookify.Domain.Apartments;
 using Bookify.Domain.Bookings;
+using Bookify.Domain.Reviews;
 using Bookify.Domain.Users;
 using Bookify.Infrastructure.Authentication;
 using Bookify.Infrastructure.Clock;
@@ -20,12 +22,14 @@ using Microsoft.Extensions.Options;
 
 namespace Bookify.Infrastructure;
 
-public static class DependencyInjection 
+public static class DependencyInjection
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services , IConfiguration configuration  )
+    public static IServiceCollection AddInfrastructure(
+        this IServiceCollection services,
+        IConfiguration configuration)
     {
-
         services.AddTransient<IDateTimeProvider, DateTimeProvider>();
+
         services.AddTransient<IEmailService, EmailService>();
 
         AddPersistence(services, configuration);
@@ -35,36 +39,15 @@ public static class DependencyInjection
         return services;
     }
 
-    private static void AddAuthentication(IServiceCollection services, IConfiguration configuration)
-    {
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer();
-        services.Configure<AuthenticationOptions>(configuration.GetSection("Authentication"));
-        services.ConfigureOptions<JwtBearerOptionsSetup>();
-
-        services.Configure<KeycloakOptions>(configuration.GetSection("KeyCloak"));
-        services.AddTransient<AdminAuthorizationDelegatingHandler>();
-        services.AddHttpClient<IAuthenticationService, AuthenticationService>((serviceProvider, client) =>
-        {
-            var keyCloakOptions = serviceProvider.GetRequiredService<IOptions<KeycloakOptions>>().Value;
-            client.BaseAddress = new Uri(keyCloakOptions.AdminUrl);
-        }).AddHttpMessageHandler<AdminAuthorizationDelegatingHandler>();
-        services.AddHttpClient<IJwtService, JwtService>((serviceProvider, client) =>
-        {
-            var keyCloakOptions = serviceProvider.GetRequiredService<IOptions<KeycloakOptions>>().Value;
-            client.BaseAddress = new Uri(keyCloakOptions.TokenUrl);
-        });
-    }
-
     private static void AddPersistence(IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("DataBase") ??
-                               throw new ArgumentNullException(nameof(configuration));
+        var connectionString =
+            configuration.GetConnectionString("Database") ??
+            throw new ArgumentNullException(nameof(configuration));
+
         services.AddDbContext<ApplicationDbContext>(options =>
         {
-
-            options.UseNpgsql(connectionString)
-                .UseSnakeCaseNamingConvention();
+            options.UseNpgsql(connectionString).UseSnakeCaseNamingConvention();
         });
 
         services.AddScoped<IUserRepository, UserRepository>();
@@ -73,10 +56,47 @@ public static class DependencyInjection
 
         services.AddScoped<IBookingRepository, BookingRepository>();
 
+        services.AddScoped<IReviewRepository, ReviewRepository>();
+
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContext>());
 
-        SqlMapper.AddTypeHandler(new DateOnlyTypeHandler());
+        services.AddSingleton<ISqlConnectionFactory>(_ =>
+            new SqlConnectionFactory(connectionString));
 
-        services.AddScoped<ISqlConnectionFactory>(_ => new SqlConnectionFactory(connectionString));
+        SqlMapper.AddTypeHandler(new DateOnlyTypeHandler());
+    }
+
+    private static void AddAuthentication(IServiceCollection services, IConfiguration configuration)
+    {
+        services
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer();
+
+        services.Configure<AuthenticationOptions>(configuration.GetSection("Authentication"));
+
+        services.ConfigureOptions<JwtBearerOptionsSetup>();
+
+        services.Configure<KeycloakOptions>(configuration.GetSection("Keycloak"));
+
+        services.AddTransient<AdminAuthorizationDelegatingHandler>();
+
+        services.AddHttpClient<IAuthenticationService, AuthenticationService>((serviceProvider, httpClient) =>
+            {
+                var keycloakOptions = serviceProvider.GetRequiredService<IOptions<KeycloakOptions>>().Value;
+
+                httpClient.BaseAddress = new Uri(keycloakOptions.AdminUrl);
+            })
+            .AddHttpMessageHandler<AdminAuthorizationDelegatingHandler>();
+
+        services.AddHttpClient<IJwtService, JwtService>((serviceProvider, httpClient) =>
+        {
+            var keycloakOptions = serviceProvider.GetRequiredService<IOptions<KeycloakOptions>>().Value;
+
+            httpClient.BaseAddress = new Uri(keycloakOptions.TokenUrl);
+        });
+
+        services.AddHttpContextAccessor();
+
+        services.AddScoped<IUserContext, UserContext>();
     }
 }
