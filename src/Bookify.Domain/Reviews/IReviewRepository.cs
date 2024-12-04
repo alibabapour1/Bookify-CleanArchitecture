@@ -2,7 +2,6 @@
 
 public interface IReviewRepository
 {
-    void AddReview(Review review);
+    void Add(Review review);
 
-    Task<List<Review>> GetApartmentAllReviewsAsync(Guid apartmentId);
 }
