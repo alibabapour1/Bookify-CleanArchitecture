@@ -18,7 +18,7 @@ internal abstract class BaseRepository<T> where T : Entity
             .FirstOrDefaultAsync(entity => entity.Id ==id,cancellationToken);
     }
 
-    public void Add(T entity)
+    public virtual void Add(T entity)
     {
         DbContext.Add(entity); 
         //I didn't use AddAsync method because this is an inMemory operation the persisting will happen when we call SaveChangesAsync method
