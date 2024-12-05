@@ -2,7 +2,7 @@
 
 public class Role
 {
-    public static Role Registered = new Role(1,nameof(Registered));
+    public static Role Registered = new Role(1,"Registered");
     public Role(int id , string name)
     {
         Id = id;
