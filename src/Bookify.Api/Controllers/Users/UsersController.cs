@@ -36,10 +36,11 @@ public class UsersController : ControllerBase
         CancellationToken cancellationToken)
     {
         var command = new RegisterUserCommand(
-            request.EmailAddress,
             request.FirstName,
             request.LastName,
-            request.Password);
+            request.EmailAddress,
+            request.Password
+            );
 
         var result = await _sender.Send(command, cancellationToken);
 
