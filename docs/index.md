@@ -4,8 +4,8 @@ layout: home
 
 hero:
   name: "Bookify"
-  text: "Alireza Abasi"
-  tagline: A web application for booking location reservations<br>Started at September 17, 2024<br>Developed by C# | .NET Core 8
+  text: "Ali Babapour"
+  tagline: An Apartment Booking system created Using .net core 8 WebApi and follows Clean architecutre Principles CQRS,DDD,Factory design-patterns are also considered. <br>Started at September 17, 2024<br>Developed by C# | .NET Core 8
   actions:
     - theme: brand
       text: Get Started
