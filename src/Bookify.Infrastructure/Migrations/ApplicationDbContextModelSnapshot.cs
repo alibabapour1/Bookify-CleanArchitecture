@@ -17,7 +17,7 @@ namespace Bookify.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.4")
+                .HasAnnotation("ProductVersion", "9.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -29,7 +29,7 @@ namespace Bookify.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    b.Property<int[]>("Amenities")
+                    b.PrimitiveCollection<int[]>("Amenities")
                         .IsRequired()
                         .HasColumnType("integer[]")
                         .HasColumnName("amenities");
@@ -161,6 +161,40 @@ namespace Bookify.Infrastructure.Migrations
                     b.ToTable("reviews", (string)null);
                 });
 
+            modelBuilder.Entity("Bookify.Domain.Users.Permissions", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int?>("RoleId")
+                        .HasColumnType("integer")
+                        .HasColumnName("role_id");
+
+                    b.HasKey("Id")
+                        .HasName("pk_permissions");
+
+                    b.HasIndex("RoleId")
+                        .HasDatabaseName("ix_permissions_role_id");
+
+                    b.ToTable("permissions", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "users:read"
+                        });
+                });
+
             modelBuilder.Entity("Bookify.Domain.Users.Role", b =>
                 {
                     b.Property<int>("Id")
@@ -185,6 +219,29 @@ namespace Bookify.Infrastructure.Migrations
                         {
                             Id = 1,
                             Name = "Registered"
+                        });
+                });
+
+            modelBuilder.Entity("Bookify.Domain.Users.RolesPermissions", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .HasColumnType("integer")
+                        .HasColumnName("role_id");
+
+                    b.Property<int>("PermissionId")
+                        .HasColumnType("integer")
+                        .HasColumnName("permission_id");
+
+                    b.HasKey("RoleId", "PermissionId")
+                        .HasName("pk_roles_permissions");
+
+                    b.ToTable("roles_permissions", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 1
                         });
                 });
 
@@ -526,6 +583,14 @@ namespace Bookify.Infrastructure.Migrations
                         .HasConstraintName("fk_reviews_user_user_id");
                 });
 
+            modelBuilder.Entity("Bookify.Domain.Users.Permissions", b =>
+                {
+                    b.HasOne("Bookify.Domain.Users.Role", null)
+                        .WithMany("Permissions")
+                        .HasForeignKey("RoleId")
+                        .HasConstraintName("fk_permissions_role_role_id");
+                });
+
             modelBuilder.Entity("RoleUser", b =>
                 {
                     b.HasOne("Bookify.Domain.Users.Role", null)
@@ -541,6 +606,11 @@ namespace Bookify.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_role_user_user_users_id");
+                });
+
+            modelBuilder.Entity("Bookify.Domain.Users.Role", b =>
+                {
+                    b.Navigation("Permissions");
                 });
 #pragma warning restore 612, 618
         }

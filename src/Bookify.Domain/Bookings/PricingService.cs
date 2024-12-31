@@ -11,11 +11,11 @@ namespace Bookify.Domain.Bookings
 {
     public class PricingService
     {
-        public PricingDetails CalculatePrice(Apartment apartment, DateRange Period)
+        public PricingDetails CalculatePrice(Apartment apartment, DateRange period)
         {
             var currency = apartment.Price.Currency;
 
-            var priceForPeriod = new Money(apartment.Price.Amount * Period.LengthInDays, currency);
+            var priceForPeriod = new Money(apartment.Price.Amount * period.LengthInDays, currency);
 
             decimal percentageUpCharge = 0;
             foreach (var apartmentAmenity in apartment.Amenities)

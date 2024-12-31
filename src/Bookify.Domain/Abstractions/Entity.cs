@@ -9,9 +9,9 @@ namespace Bookify.Domain.Abstractions
     public abstract class Entity : IEquatable<Entity>
     {
         private readonly List<IDomainEvents> _domainEvents = new();
-        protected Entity(Guid EntityId)
+        protected Entity(Guid entityId)
         {
-            EntityId = Id;
+            Id = entityId;
         }
 
         protected Entity()
